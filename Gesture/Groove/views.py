@@ -4,7 +4,7 @@ from gesture_control.gesture import play_pause, next_track, previous_track, volu
 
 # Home view
 def home(request):
-    return render(request, 'controller/index.html')
+    return render(request, 'templates/src/components/Home.jsx')
 
 # Trigger Spotify actions
 def perform_action(request):
