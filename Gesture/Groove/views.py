@@ -1,10 +1,10 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from gesture_control.gesture import play_pause, next_track, previous_track, volume_up, volume_down
+from .gesture_control.gesture import play_pause, next_track, previous_track, volume_up, volume_down
 
 # Home view
 def home(request):
-    return render(request, 'templates/src/components/Home.jsx')
+    return render(request, 'Home.jsx')
 
 # Trigger Spotify actions
 def perform_action(request):
