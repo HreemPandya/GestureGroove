@@ -15,8 +15,13 @@ To successfully run this project on your laptop follow these steps:
 7. Enjoy the controlling music with cool gestures!!!
 
 Gestures:
+
 Play/Pause - Pinch two fingers
+
 Volume Up - Move Hand up
+
 Volume Down - Move Hand Down
+
 Next Track - Move Hand Right
+
 Previous Track - Move Hand Left
