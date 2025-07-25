@@ -1,37 +1,46 @@
-import React, { useState } from "react";
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import Instructions from "./components/Instructions";
-import SpotifyConnect from "./components/SpotifyConnect";
-import WebcamFeed from "./components/WebcamFeed";
+// FILE LOCATION: /src/App.js or /src/App.tsx
+// REPLACE YOUR EXISTING APP FILE with this content
 
-const App = () => {
-  const [activeTab, setActiveTab] = useState("home");
+import React, { useState } from 'react';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Instructions from './components/Instructions';
+import SpotifyConnect from './components/SpotifyConnect';
+import GestureSpotifyController from './components/GestureSpotifyController'; // Your new component
+import './App.css';
+
+function App() {
+  const [activeTab, setActiveTab] = useState('home');
+  const [isSpotifyConnected, setIsSpotifyConnected] = useState(false);
 
   const renderContent = () => {
     switch (activeTab) {
-      case "home":
+      case 'home':
         return <Home setSelectedPage={setActiveTab} />;
-      case "instructions":
+      case 'instructions':
         return <Instructions />;
-      case "connect-spotify":
-        return <SpotifyConnect />;
-      case "gesture-control":
-        return <WebcamFeed />;
+      case 'connect-spotify':
+        return (
+          <SpotifyConnect 
+            isConnected={isSpotifyConnected} 
+            onConnect={setIsSpotifyConnected} 
+          />
+        );
+      case 'gesture-control':
+        return <GestureSpotifyController />;
       default:
         return <Home setSelectedPage={setActiveTab} />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-900 via-emerald-800 to-green-900">
+    <div className="App">
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
-      <main className="container mx-auto pt-20 px-4">{renderContent()}</main>
-      <footer className="mt-auto py-6 text-center text-green-300">
-        <p>Built with React and MediaPipe Hands | GestureGroove &copy; 2025</p>
-      </footer>
+      <main className="pt-16">
+        {renderContent()}
+      </main>
     </div>
   );
-};
+}
 
 export default App;

@@ -5,9 +5,9 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
 # Spotify credentials and setup
-SPOTIPY_CLIENT_ID = 'ac8efca98a4f4f6da46efd28290904b2'
-SPOTIPY_CLIENT_SECRET = 'bf71ba80f216472ab3dcca97a80855e8'
-SPOTIPY_REDIRECT_URI = 'http://localhost:8888/callback'
+SPOTIPY_CLIENT_ID = 'd4399e2a2a2147c98d8405c27b052594'
+SPOTIPY_CLIENT_SECRET = '869ed3ddacfb408fa1bad415c629cafe'
+SPOTIPY_REDIRECT_URI = 'http://127.0.0.1:8888/callback'
 SPOTIPY_SCOPE = "user-library-read user-read-playback-state user-modify-playback-state streaming"
 
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID,
@@ -22,16 +22,36 @@ mp_drawing = mp.solutions.drawing_utils
 
 # Initialize the webcam
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Error: Could not open webcam")
+    exit()
+    
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
 # Functions for controlling Spotify
 def play_pause():
-    current_state = sp.current_playback()
-    if current_state and current_state['is_playing']:
-        sp.pause_playback()
-    else:
-        sp.start_playback()
+    try:
+        current_state = sp.current_playback()
+        if current_state is None:
+            print("No active device found. Please open Spotify and start playing something first!")
+            return
+        
+        if current_state and current_state['is_playing']:
+            sp.pause_playback()
+        else:
+            # Get available devices
+            devices = sp.devices()
+            if not devices['devices']:
+                print("No Spotify devices found. Please open Spotify app first!")
+                return
+                
+            # Use the first available device
+            device_id = devices['devices'][0]['id']
+            sp.start_playback(device_id=device_id)
+    except Exception as e:
+        print(f"Spotify Error: {str(e)}")
+        print("Please make sure Spotify is open and playing something first!")
 
 def next_track():
     sp.next_track()
