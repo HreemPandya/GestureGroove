@@ -1,5 +1,8 @@
+// FILE LOCATION: /templates/src/components/Navbar.jsx
+// REPLACE your existing Navbar.jsx with this fixed version
+
 import React, { useState } from "react";
-import { Music2 } from "lucide-react";
+import { Music2, Menu } from "lucide-react";
 
 const Navbar = ({ activeTab, setActiveTab }) => {
   const [isMenuToggled, setIsMenuToggled] = useState(false);
@@ -38,7 +41,7 @@ const Navbar = ({ activeTab, setActiveTab }) => {
             className="md:hidden text-white hover:text-green-100 focus:outline-none"
             onClick={() => setIsMenuToggled(!isMenuToggled)}
           >
-            <img alt="menu-icon" src="/menu-icon.svg" className="w-6 h-6" />
+            <Menu className="w-6 h-6" />
           </button>
         </div>
       </div>

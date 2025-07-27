@@ -16,3 +16,11 @@
   border-radius: 5px;
   z-index: 10;
 }
+
+.App {
+  min-height: 100vh;
+}
+
+.pt-16 {
+  padding-top: 4rem;
+}
