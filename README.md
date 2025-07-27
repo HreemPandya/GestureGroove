@@ -1,7 +1,5 @@
 # GestureGroove
 
-Gesture Controlled Spotify Music Controller
-
 Music controls now made more easy, efficient, and available on your fingertips.
 
 To successfully run this project on your laptop follow these steps:
